@@ -1,5 +1,10 @@
 <?php
 
+$nombre_producto = $_POST['nombre_producto'];
+$precio_producto = $_POST['precio_producto'];
+//Mirar subida de ficheros;
+$categoria_producto = $_POST['categoria_producto'];
+
 ?>
 
 
@@ -13,20 +18,22 @@
     <body>
         <h1> Formulario para crear Producto</h1>
         <div>
-            <form>
-                <label>Introduce un nombre: </label><input type="text" id="nombre_producto">
+            <form name="formulario" action="crear_producto.php" method="post">
+                <label>Introduce un nombre: </label><input placeholder="nombre" type="text" name="nombre_producto" id="nombre_producto">
                 <br>
-                <label>Introduce el precio en €: </label><input type="number" min="0.1" step="any" id="precio_producto">
+                <label>Introduce el precio en €: </label><input type="number" placeholder="numero" name="precio_producto" min="0.1" step="any" id="precio_producto">
                 <br>
-                <label>Introduce una imagen para el producto: </label> <input type="file" id="imagen_producto">
+                <label>Introduce una imagen para el producto: </label> <input type="file" name="imagen_producto" id="imagen_producto">
                 <br>
                 <label>Selecciona la categoría del producto: </label> 
-                <select id="categoria_producto">
+                <select id="categoria_producto" name="categoria_producto">
                     <option> Deportivo </option>
                     <option> Diver </option>
                     <option> Clasico </option>
                     <option> Casual </option>
                 </select>
+                <br>
+                <button type="submit"> Enviar Formulario </button>
             </form>
         </div>
     </body>
