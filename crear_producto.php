@@ -1,5 +1,7 @@
 <?php
 
+
+//Comprobar que los arrays no esten vacios aqui.
 $nombre_producto = $_POST['nombre_producto'];
 $precio_producto = $_POST['precio_producto'];
 //Mirar subida de ficheros;
