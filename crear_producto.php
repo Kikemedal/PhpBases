@@ -18,7 +18,7 @@ $categoria_producto = $_POST['categoria_producto'];
     <body>
         <h1> Formulario para crear Producto</h1>
         <div>
-            <form name="formulario" action="crear_producto.php" method="post">
+            <form name="formulario" action="crear_producto.php" method="post" enctype="multipart/form-data">
                 <label>Introduce un nombre: </label><input placeholder="nombre" type="text" name="nombre_producto" id="nombre_producto">
                 <br>
                 <label>Introduce el precio en €: </label><input type="number" placeholder="numero" name="precio_producto" min="0.1" step="any" id="precio_producto">
