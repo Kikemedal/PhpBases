@@ -25,6 +25,7 @@ $categoria_producto = $_POST['categoria_producto'];
                 <br>
                 <label>Introduce el precio en €: </label><input type="number" placeholder="numero" name="precio_producto" min="0.1" step="any" id="precio_producto">
                 <br>
+                <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
                 <label>Introduce una imagen para el producto: </label> <input type="file" name="imagen_producto" id="imagen_producto">
                 <br>
                 <label>Selecciona la categoría del producto: </label> 
