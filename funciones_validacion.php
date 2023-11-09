@@ -1,34 +1,25 @@
 <?php
 
 function validar_nombre($nombre){
-    if(empty($nombre)){
-        return false;
+    $expresion = '/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/';
+    if(preg_match($expresion, $nombre)){
+        return true;
     }else{
-        $expresion = '/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/';
-        if(preg_match($expresion, $nombre)){
-            return true;
-        }else{
-            return false;
-        }
+        return false;
     }
 }
 
 function validar_precio($precio){
-    if(empty($precio)){
-        return false;
+    if(gettype($precio) == "integer" || gettype($precio) == "double" || gettype($precio) == "float"){
+        return true;
     }else{
-        if(gettype($precio)!= "integer" || gettype($precio)!="double"){
-            return false;
-        }else{
-            return true;
-        }
-    }        
-    
+        return false;
+    }       
 }
 
 
 function validar_imagen($Nombre_Imagen){
-    if(emty($Nombre_Imagen)){
+    if(empty($Nombre_Imagen)){
         return false;
     }else{
         $expresion = "/\w+(\.)*\.(gif|jpe?g|png)$/i"; 

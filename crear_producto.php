@@ -1,11 +1,91 @@
 <?php
 
+include "funciones_validacion.php";
 
-//Comprobar que los arrays no esten vacios aqui.
-$nombre_producto = $_POST['nombre_producto'];
-$precio_producto = $_POST['precio_producto'];
-//Mirar subida de ficheros;
-$categoria_producto = $_POST['categoria_producto'];
+
+//Comprobar que la  ha dado al boton enviar.
+
+
+
+if(isset($_POST['Enviar'])){
+
+    //Comprobamos que los campos han sido rellenado.
+    if(isset($_POST['nombre_producto']) && isset($_POST['precio_producto']) && isset($_POST['categoria_producto'])){
+
+        $nombre_producto = trim($_POST['nombre_producto']);
+        $precio_producto = floatval($_POST['precio_producto']);         
+        $fichero_temporal = $_FILES['imagen_producto']['tmp_name'];
+        $fichero_subido = $_FILES['imagen_producto']['name'];
+        $categoria_producto = trim($_POST['categoria_producto']);
+        $booleano = true;
+        //$arrayDeDatosAValidar = array($nombre_producto, $precio_producto, $fichero_subido);
+
+        
+        $resultado = "";
+
+        //¿Se podria optimizar con un bucle?
+
+        if(empty($nombre_producto)){
+            $resultado .= "<p class='error'> El nombre del producto esta vacío </p>";
+            $booleano = false;
+        }
+        else if(validar_nombre($nombre_producto)){
+            $resultado .= "<p class='correcto' > El nombre del producto se ha validado correctamente </p>";
+        }else{
+            $resultado .= "<p class='error'> El nombre del producto no es correcto </p>";
+            $booleano = false;
+        }
+
+        if(empty($precio_producto)){
+            $resultado .= "<p class='error'> El precio del producto esta vacío </p>";
+            $booleano = false;
+        }
+        else if(validar_precio($precio_producto)){
+            $resultado .= "<p class='correcto' > El precio del producto se ha validado correctamente </p>";
+        }else{
+            $resultado .= "<p class='error'> El precio del producto no es correcto </p>";
+            $booleano = false;
+        }
+
+        if (move_uploaded_file($fichero_temporal, 'imagenes/'.$fichero_subido)) {
+            if(($_FILES['imagen_producto']['name'])){
+                $resultado .= "<p class='correcto'> La imagen se ha validado correctamente </p>";
+            }else{
+                $resultado .= "<p class='error'>El nombre de la imagen no es correcto</p>";
+                $booleano = false;
+            }
+        } else {
+            $resultado .= "<p class='error'> No se ha subido ninguna imagen. </p>";
+            $booleano = false;
+        }
+
+
+        //Si booleano cambio a false, se muestra una string que ha ido almacenando información y dice donde estan los errores.
+        //Si es true se almacena la información en las tablas.
+
+        
+
+        //si los datos estan mal validados se muestra cuales están mal y se ofrece un enlace para volver a rellenarlos
+        if($booleano){
+            //mostramos que todo ha ido bien;
+            echo $resultado;
+            echo "Los datos se han cumplimentado correctamente, vuelve al menu principal: <a href=''>  </a>";
+            //almacenar información + link para volver al menú;
+
+            
+        }else{
+            //mostramos información de los campos erroneos, no se envia la información;
+            echo $resultado;
+            echo "Vuelve atrás y completa los datos correctamente: <a href=''> </a>";
+            //link para volver a atrás y completar otra vez;
+
+
+        }
+    }
+
+    
+
+}
 
 ?>
 
@@ -16,16 +96,17 @@ $categoria_producto = $_POST['categoria_producto'];
     <head>
         <title> Formulario para crear producto </title>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="crear_producto.css">
     </head>
     <body>
         <h1> Formulario para crear Producto</h1>
         <div>
-            <form name="formulario" action="crear_producto.php" method="post" enctype="multipart/form-data">
+            <form name="formulario" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data">
                 <label>Introduce un nombre: </label><input placeholder="nombre" type="text" name="nombre_producto" id="nombre_producto">
                 <br>
-                <label>Introduce el precio en €: </label><input type="number" placeholder="numero" name="precio_producto" min="0.1" step="any" id="precio_producto">
+                <label>Introduce el precio en €: </label><input type="number" placeholder="precio" name="precio_producto" min="0.1" step="any" id="precio_producto">
                 <br>
-                <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                <!--<input type="hidden" name="MAX_FILE_SIZE" value="30000" /> -->
                 <label>Introduce una imagen para el producto: </label> <input type="file" name="imagen_producto" id="imagen_producto">
                 <br>
                 <label>Selecciona la categoría del producto: </label> 
@@ -36,7 +117,7 @@ $categoria_producto = $_POST['categoria_producto'];
                     <option> Casual </option>
                 </select>
                 <br>
-                <button type="submit"> Enviar Formulario </button>
+                <button type="submit" name="Enviar"> Enviar Formulario </button>
             </form>
         </div>
     </body>
