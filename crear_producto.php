@@ -5,8 +5,6 @@ include "funciones_validacion.php";
 
 //Comprobar que la  ha dado al boton enviar.
 
-
-
 if(isset($_POST['Enviar'])){
 
     //Comprobamos que los campos han sido rellenado.
@@ -16,9 +14,8 @@ if(isset($_POST['Enviar'])){
         $precio_producto = floatval($_POST['precio_producto']);         
         $fichero_temporal = $_FILES['imagen_producto']['tmp_name'];
         $fichero_subido = $_FILES['imagen_producto']['name'];
-        $categoria_producto = trim($_POST['categoria_producto']);
+        $categoria_producto = intval(($_POST['categoria_producto']));
         $booleano = true;
-        //$arrayDeDatosAValidar = array($nombre_producto, $precio_producto, $fichero_subido);
 
         
         $resultado = "";
@@ -48,7 +45,7 @@ if(isset($_POST['Enviar'])){
         }
 
         if (move_uploaded_file($fichero_temporal, 'imagenes/'.$fichero_subido)) {
-            if(($_FILES['imagen_producto']['name'])){
+            if(validar_imagen($_FILES['imagen_producto']['name'])){
                 $resultado .= "<p class='correcto'> La imagen se ha validado correctamente </p>";
             }else{
                 $resultado .= "<p class='error'>El nombre de la imagen no es correcto</p>";
@@ -60,20 +57,51 @@ if(isset($_POST['Enviar'])){
         }
 
 
-        //Si booleano cambio a false, se muestra una string que ha ido almacenando información y dice donde estan los errores.
-        //Si es true se almacena la información en las tablas.
-
         
 
-        //si los datos estan mal validados se muestra cuales están mal y se ofrece un enlace para volver a rellenarlos
+        //si lo datos se han validado correctamente nos comnectamos a la base de datos para insertar los datos.
         if($booleano){
+
             //mostramos que todo ha ido bien;
             echo $resultado;
-            echo "Los datos se han cumplimentado correctamente, vuelve al menu principal: <a href=''>  </a>";
-            //almacenar información + link para volver al menú;
 
             
+            $servername = "localhost";
+            $username ="mitiendaonline";
+            $passwd = "1234";
+            
+            //creamos la conexion
+
+            try{
+                $conexion = new PDO("mysql:host=".$servername.";dbname=mitiendaonline2", $username, $passwd);
+                $conexion -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                echo "Se ha conectado exitosamente a la base de datos<br>";
+
+                
+                $sql = "INSERT INTO productos (Nombre, Precio,Imagen, Categoría) 
+                VALUES ('".$nombre_producto."','". $precio_producto."','". $fichero_subido."','". $categoria_producto."')";
+
+                $conexion->exec($sql);
+
+                echo "Datos almacenados correctamente";
+
+                //cerramos la conexion
+                $conexion = null;                
+
+            }catch (PDOException $e){
+                echo "Conexion fallida " . $e ->getMessage();
+            }
+
+
+            //link para volver al menú;
+            echo "<br>Los datos se han cumplimentado correctamente, vuelve al menu principal: <a href=''>  </a>";
+
+
+        //si los datos estan mal validados se muestra cuales están mal y se ofrece un enlace para volver a rellenarlos por tanto
+        //no nos conectamos a la base de datos
         }else{
+
+
             //mostramos información de los campos erroneos, no se envia la información;
             echo $resultado;
             echo "Vuelve atrás y completa los datos correctamente: <a href=''> </a>";
@@ -111,10 +139,10 @@ if(isset($_POST['Enviar'])){
                 <br>
                 <label>Selecciona la categoría del producto: </label> 
                 <select id="categoria_producto" name="categoria_producto">
-                    <option> Deportivo </option>
-                    <option> Diver </option>
-                    <option> Clasico </option>
-                    <option> Casual </option>
+                    <option value="1"> Deportivo </option>
+                    <option value="2"> Diver </option>
+                    <option value="3"> Clasico </option>
+                    <option value="4"> Casual </option>
                 </select>
                 <br>
                 <button type="submit" name="Enviar"> Enviar Formulario </button>
