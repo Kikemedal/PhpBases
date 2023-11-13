@@ -28,6 +28,8 @@ if(isset($_POST['Enviar'])){
             $tabla .= "<th>" .$Array_encabezado[$i][0]."</th>";
 
         }
+        $tabla .= "<th> Modificar </th>";
+        $tabla .= "<th> Eliminar </th>";
         $tabla .= "</tr>";
 
 
@@ -42,6 +44,8 @@ if(isset($_POST['Enviar'])){
             $stmt3=$conexion -> query("SELECT Nombre FROM categorías WHERE id =". $row['Categoría']);
             $row2 = $stmt3->fetch();
             $tabla.= "<td>". $row2['0']  . "</td>";
+            $tabla.= "<td><form action ='edita_producto.php' name='EditarProducto' method='GET'> <input name='id_modifica' type='hidden' value='". $row['id'] ."'><button type='sbmit'> Edita el producto </button></form> </td>";
+            $tabla.= "<td><form action ='elimina_producto.php' name='EliminarProducto' method='GET'> <input name='id_elimina'type='hidden' value='". $row['id'] ."'> <button type='sbmit'> Elimina el producto </button></form></td>";
             $tabla.= "<tr>";
         }
 
