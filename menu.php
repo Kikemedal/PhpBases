@@ -18,9 +18,9 @@
         <nav>
             <ul>
                 <li> <a href='/PhpBases/crear_producto.php'> Crea un producto </a></li>
-                <li> <a> Consulta un producto </a></li>
-                <li> <a> Modifica un producto </a></li>
-                <li> <a> Elimina un producto </a></li>
+                <li> <a href=''> Consulta un producto </a></li>
+                <li> <a href=''> Modifica un producto </a></li>
+                <li> <a href=''> Elimina un producto </a></li>
             </ul>
         </nav>
 
