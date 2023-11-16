@@ -159,7 +159,7 @@ if(isset($_GET['EnviarModifica'])){
         $String .= "<input type='hidden' value='". $id."' name='id_modificar'>";
         $String .= "<label>Introduce una nueva imagen para el producto: </label> <input value='/imagenes/".$img."'type='file' name='imagen_producto' id='imagen_producto_mod'>";
         $String .= "<br>";
-        $String .= "<img style='width:50px;' alt='Imagen del producto' src='/imagenes/".$img."'>";
+        $String .= "<img style='width:50px;' alt='Imagen del producto' src='imagenes/".$img."'>";
         $String .="<br>";
         $String .= "<label>Selecciona la categoría del productos</label><select name='categoria_producto' id='categotia_producto'>";
         if($c == "1"){

@@ -40,7 +40,7 @@ if(isset($_POST['Enviar'])){
             $tabla.= "<td>". $row['id'] . "</td>";
             $tabla.= "<td>". $row['Nombre'] . "</td>";
             $tabla.= "<td>". $row['Precio']  . "</td>";
-            $tabla.= "<td> <img src='imagenes/'".$row['Imagen']." style='width:100;height:50;'></td>";
+            $tabla.= "<td> <img src='imagenes/".$row['Imagen']."' style='width:100;height:50;'></td>";
             $stmt3=$conexion -> query("SELECT Nombre FROM categorías WHERE id =". $row['Categoría']);
             $row2 = $stmt3->fetch();
             $tabla.= "<td>". $row2['0']  . "</td>";
