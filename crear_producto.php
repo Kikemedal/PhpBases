@@ -94,7 +94,7 @@ if(isset($_POST['Enviar'])){
 
 
             //link para volver al menú;
-            echo "<br>Los datos se han cumplimentado correctamente, vuelve al menu principal: <a href=''>  </a>";
+            echo "<br><span>Los datos se han cumplimentado correctamente, vuelve al menu principal: <a href='menu.php'> Volver al menu  </a> </span>";
 
 
         //si los datos estan mal validados se muestra cuales están mal y se ofrece un enlace para volver a rellenarlos por tanto
@@ -104,7 +104,7 @@ if(isset($_POST['Enviar'])){
 
             //mostramos información de los campos erroneos, no se envia la información;
             echo $resultado;
-            echo "Vuelve atrás y completa los datos correctamente: <a href=''> </a>";
+            echo "Vuelve atrás y completa los datos correctamente: <a href='crear_producto.php'> Volver atrás </a>";
             //link para volver a atrás y completar otra vez;
 
 
