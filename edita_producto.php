@@ -30,36 +30,36 @@ if(isset($_POST['Enviar'])){
         //¿Se podria optimizar con un bucle?
 
         if(empty($nombre_nuevo)){
-            $resultado .= "<p class='error'> El nombre del producto esta vacío </p>";
+            $resultado .= "<p style='color:red;'> El nombre del producto esta vacío </p>";
             $booleano = false;
         }
         else if(validar_nombre($nombre_nuevo)){
-            $resultado .= "<p class='correcto' > El nombre del producto se ha validado correctamente </p>";
+            $resultado .= "<p style='color:blue' > El nombre del producto se ha validado correctamente </p>";
         }else{
-            $resultado .= "<p class='error'> El nombre del producto no es correcto </p>";
+            $resultado .= "<p  style='color:red;'> El nombre del producto no es correcto </p>";
             $booleano = false;
         }
 
         if(empty($precio_nuevo)){
-            $resultado .= "<p class='error'> El precio del producto esta vacío </p>";
+            $resultado .= "<p  style='color:red;'> El precio del producto esta vacío </p>";
             $booleano = false;
         }
         else if(validar_precio($precio_nuevo)){
-            $resultado .= "<p class='correcto' > El precio del producto se ha validado correctamente </p>";
+            $resultado .= "<p style='color:blue' > El precio del producto se ha validado correctamente </p>";
         }else{
-            $resultado .= "<p class='error'> El precio del producto no es correcto </p>";
+            $resultado .= "<p style='color:red;'> El precio del producto no es correcto </p>";
             $booleano = false;
         }
 
         if (move_uploaded_file($fichero_temporal, 'imagenes/'.$fichero_subido)) {
             if(validar_imagen($_FILES['imagen_producto']['name'])){
-                $resultado .= "<p class='correcto'> La imagen se ha validado correctamente </p>";
+                $resultado .= "<p style='color:blue'> La imagen se ha validado correctamente </p>";
             }else{
-                $resultado .= "<p class='error'>El nombre de la imagen no es correcto</p>";
+                $resultado .= "<p  style='color:red;'>El nombre de la imagen no es correcto</p>";
                 $booleano = false;
             }
         } else {
-            $resultado .= "<p class='error'> No se ha subido ninguna imagen. </p>";
+            $resultado .= "<p style='color:red;'> No se ha subido ninguna imagen. </p>";
             $booleano = false;
         }
 
@@ -111,13 +111,15 @@ if(isset($_POST['Enviar'])){
                 echo $sql4 . "<br>" . $e->getMessage();
             }
 
-            echo "<br>Los datos se han cumplimentado correctamente, vuelve al menu principal: <a href=''>  </a>";
+            echo "<br>Los datos se han cumplimentado correctamente, vuelve al menu principal: <a href='menu.php'> Menú</a>";
 
         }else{
 
             //mostramos información de los campos erroneos, no se envia la información;
             echo $resultado;
-            echo "Vuelve atrás y completa los datos correctamente: <a href=''> </a>";
+            echo "<br>";
+            echo "<span> Vuelve atrás y completa los datos correctamente: <a href='edita_producto.php?EnviarModifica=1&id_modifica=".$id_producto."'> Vuelve atrás </a> </span>";
+            echo "<hr>";
             //link para volver a atrás y completar otra vez;
             
 
@@ -125,11 +127,7 @@ if(isset($_POST['Enviar'])){
     }
     
 
-
-
-} // 
-
-if(isset($_GET['EnviarModifica'])){
+} else if(isset($_GET['EnviarModifica'])){
 
     $id = intval($_GET['id_modifica']);
 
@@ -161,7 +159,7 @@ if(isset($_GET['EnviarModifica'])){
         $String .= "<br>";
         $String .= "<img style='width:50px;' alt='Imagen del producto' src='imagenes/".$img."'>";
         $String .="<br>";
-        $String .= "<label>Selecciona la categoría del productos</label><select name='categoria_producto' id='categotia_producto'>";
+        $String .= "<label>Selecciona la categoría del productos</label><select name='categoria_producto' id='categoria_producto'>";
         if($c == "1"){
             $String .="<option value='1' selected > Deportivo </option>";
         }else{
