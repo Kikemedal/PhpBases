@@ -136,6 +136,10 @@ if(isset($_GET['EnviarModifica'])){
 
     $String = "<form name='formulario' action= 'edita_producto.php' method='post' enctype='multipart/form-data'>";
 
+    $servername = "localhost";
+    $username = "mitiendaonline3";
+    $password = "1234localhost";
+    $dbname = "mitiendaonline2";
     try{
         $conexion = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -151,29 +155,29 @@ if(isset($_GET['EnviarModifica'])){
         $String .="<label> Introduce el nuevo precio del  producto en Euros: </label><input value='".$p."' type='number' placeholder='precio' name='precio_producto' min='0.1' step='any' id='precio_producto_mod'>";
         $String .="<br>";
         $String .= "<input type='hidden' value='". $id."' name='id_modificar'>";
-        $String .= "<label>Introduce una nueva imagen para el producto: </label> <input value='/imagenes".$img."'type='file' name='imagen_producto' id='imagen_producto_mod'>";
+        $String .= "<label>Introduce una nueva imagen para el producto: </label> <input value='/imagenes/".$img."'type='file' name='imagen_producto' id='imagen_producto_mod'>";
         $String .= "<br>";
-        $String .= "<img style='width:50px;' alt='Imagen del producto' src='/imagenes".$img."'>";
+        $String .= "<img style='width:50px;' alt='Imagen del producto' src='/imagenes/".$img."'>";
         $String .="<br>";
-        $String .= "<label>Selecciona la categoría del productos</label>";
-        if($c == "Deportivo"){
+        $String .= "<label>Selecciona la categoría del productos</label><select name='categoria_producto' id='categotia_productoMOD'>";
+        if($c == "1"){
             $String .="<option value='1' selected > Deportivo </option>";
         }else{
             $String .="<option value='1'> Deportivo </option>";
         } 
-        if($c == "Diver"){
+        if($c == "2"){
             $String .="<option value='2' selected > Diver </option>";
         }else{
             $String .="<option value='2' > Diver </option>";
 
         } 
-        if ($c == "Clasico"){
+        if ($c == "3"){
             $String .="<option value='3' selected > Clasico </option>";
         }else {
             $String .="<option value='3'> Clasico </option>";
 
         }
-        if ($c == "Casual"){
+        if ($c == "4"){
             $String .="<option value='4' selected > Casual </option>"; 
         }else{
             $String .="<option value='4' > Casual </option>";
@@ -209,7 +213,7 @@ if(isset($_GET['EnviarModifica'])){
 
         $stmt=$conexion->query("SELECT * FROM productos");
         while ($row=$stmt->fetch()){
-            $String .= "<option value='".$row[id]."'>" .$row['Nombre'].  "</option>";
+            $String .= "<option value='".$row['id']."'>" .$row['Nombre'].  "</option>";
         }
 
         $conexion = null;
