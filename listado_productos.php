@@ -45,7 +45,7 @@ if(isset($_POST['Enviar'])){
             $row2 = $stmt3->fetch();
             $tabla.= "<td>". $row2['0']  . "</td>";
             $tabla.= "<td> <a href='edita_producto.php?EnviarModifica=1&id_modifica=".$row['id']."'> Editar Producto </a> </td>";
-            $tabla.= "<td><form action ='elimina_producto.php' name='EliminarProducto' method='GET'> <input name='id_elimina'type='hidden' value='". $row['id'] ."'> <button name='EnviarElimina' type='sbmit'> Elimina el producto </button></form></td>";
+            $tabla.= "<td> <a href='elimina_producto.php?EnviarElimina=1&id_elimina=".$row['id']."'>Eliminar Producto </a> </td>";
             $tabla.= "<tr>";
         }
 
