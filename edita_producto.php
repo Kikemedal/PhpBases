@@ -7,6 +7,8 @@ Si no lo recibe, mostrará al usuario un desplegable para que escoja el producto
 Mostrará los datos del producto en un formulario que el usuario podrá modificar y enviar a sí mismo para realizar la actualización de los datos en la tabla.
 */
 
+include "funciones_validacion.php";
+
 if(isset($_POST['Enviar'])){
 
 
@@ -27,22 +29,22 @@ if(isset($_POST['Enviar'])){
 
         //¿Se podria optimizar con un bucle?
 
-        if(empty($nombre_producto)){
+        if(empty($nombre_nuevo)){
             $resultado .= "<p class='error'> El nombre del producto esta vacío </p>";
             $booleano = false;
         }
-        else if(validar_nombre($nombre_producto)){
+        else if(validar_nombre($nombre_nuevo)){
             $resultado .= "<p class='correcto' > El nombre del producto se ha validado correctamente </p>";
         }else{
             $resultado .= "<p class='error'> El nombre del producto no es correcto </p>";
             $booleano = false;
         }
 
-        if(empty($precio_producto)){
+        if(empty($precio_nuevo)){
             $resultado .= "<p class='error'> El precio del producto esta vacío </p>";
             $booleano = false;
         }
-        else if(validar_precio($precio_producto)){
+        else if(validar_precio($precio_nuevo)){
             $resultado .= "<p class='correcto' > El precio del producto se ha validado correctamente </p>";
         }else{
             $resultado .= "<p class='error'> El precio del producto no es correcto </p>";
@@ -96,10 +98,10 @@ if(isset($_POST['Enviar'])){
                 $stmt4->execute();
 
                 // echo a message to say the UPDATE succeeded
-                echo $stmt1->rowCount() . " records UPDATED successfully <br>";
-                echo $stmt2->rowCount() . " records UPDATED successfully <br>";
-                echo $stmt3->rowCount() . " records UPDATED successfully <br>";
-                echo $stmt4->rowCount() . " records UPDATED successfully <br>";
+                echo $stmt1->rowCount() . " El nombre se ha modificado correctamente <br>";
+                echo $stmt2->rowCount() . " El precio se ha modificado correctamente <br>";
+                echo $stmt3->rowCount() . " La imagen se ha modificado correctamente <br>";
+                echo $stmt4->rowCount() . " La categoría se ha modificado correctamente <br> <br>";
 
                 $conexion = null;
             } catch(PDOException $e) {
@@ -150,16 +152,16 @@ if(isset($_GET['EnviarModifica'])){
         $p = $row['Precio'];
         $img = $row['Imagen'];
         $c = $row['Categoría'];
-        $String .= "<label> Introduce el nuevo nombre del producto: </label><input value='".$n."' type='text' placeholder='Nuevo nombre' name='nombre_producto' id='nombre_producto_mod'>";
+        $String .= "<label> Introduce el nuevo nombre del producto: </label><input value='".$n."' type='text' placeholder='Nuevo nombre' name='nombre_producto' id='nombre_producto'>";
         $String .="<br>";
-        $String .="<label> Introduce el nuevo precio del  producto en Euros: </label><input value='".$p."' type='number' placeholder='precio' name='precio_producto' min='0.1' step='any' id='precio_producto_mod'>";
+        $String .="<label> Introduce el nuevo precio del  producto en Euros: </label><input value='".$p."' type='number' placeholder='precio' name='precio_producto' min='0.1' step='any' id='precio_producto'>";
         $String .="<br>";
         $String .= "<input type='hidden' value='". $id."' name='id_modificar'>";
         $String .= "<label>Introduce una nueva imagen para el producto: </label> <input value='/imagenes/".$img."'type='file' name='imagen_producto' id='imagen_producto_mod'>";
         $String .= "<br>";
         $String .= "<img style='width:50px;' alt='Imagen del producto' src='/imagenes/".$img."'>";
         $String .="<br>";
-        $String .= "<label>Selecciona la categoría del productos</label><select name='categoria_producto' id='categotia_productoMOD'>";
+        $String .= "<label>Selecciona la categoría del productos</label><select name='categoria_producto' id='categotia_producto'>";
         if($c == "1"){
             $String .="<option value='1' selected > Deportivo </option>";
         }else{
