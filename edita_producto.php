@@ -9,6 +9,17 @@ Mostrará los datos del producto en un formulario que el usuario podrá modifica
 
 include "funciones_validacion.php";
 
+
+session_start();
+
+if(empty($_SESSION['correo'])){
+
+    header("Location: form_login.php");
+
+    exit(); //Salimos del script actual para que no siga con el codigo de abajo.
+
+}
+
 if(isset($_POST['Enviar'])){
 
 

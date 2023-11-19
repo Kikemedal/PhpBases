@@ -2,6 +2,17 @@
 
 //Para listar productos se debe consultar a la base de datos recorrer el array organizando cada informacion en columnas.
 
+
+session_start();
+
+if(empty($_SESSION['correo'])){
+
+    header("Location: form_login.php");
+
+    exit(); //Salimos del script actual para que no siga con el codigo de abajo.
+
+}
+
 if(isset($_POST['Enviar'])){
     $servername = "localhost";
     $username = "mitiendaonline3";

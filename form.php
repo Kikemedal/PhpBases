@@ -34,9 +34,18 @@ if($_POST['EnviarInfo']){
                 }
             }
 
+            //Si los datos coinciden con los de las bases de datos se inicia sesión
+
             if($boolcorreo && $boolcontra){
 
-                echo "<p style='color:blue;' > Los datos proporcionados son correctos </p>";
+                //echo "<p style='color:blue;' > Los datos proporcionados son correctos </p>"; Antes de un header no se puede enviar informacion al documento html ya que puede dar lugar a errores.
+                
+                session_start(); //Iniciamos una sesión nueva.
+
+                $_SESSION['correo'] = $email;  //se establece un valor a la variable global para que se pueda leer desde otros fichero php.
+
+                header("Location: menu.php");
+
 
             }else if($boolcorreo){
 

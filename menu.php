@@ -1,4 +1,16 @@
 <?php
+
+session_start();
+
+if(empty($_SESSION['correo'])){
+
+    header("Location: form_login.php");
+
+    exit(); //Salimos del script actual para que no siga con el codigo de abajo.
+
+}
+
+
 ?>
 
 

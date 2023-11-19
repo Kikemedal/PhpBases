@@ -2,6 +2,16 @@
 
 include "funciones_validacion.php";
 
+session_start();
+
+if(empty($_SESSION['correo'])){
+
+    header("Location: form_login.php");
+
+    exit(); //Salimos del script actual para que no siga con el codigo de abajo.
+
+}
+
 
 //Comprobar que la  ha dado al boton enviar.
 
@@ -148,6 +158,7 @@ if(isset($_POST['Enviar'])){
                 <button type="submit" name="Enviar"> Enviar Formulario </button>
             </form>
         </div>
+        
     </body>
 
 </html>
