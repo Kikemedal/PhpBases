@@ -67,8 +67,8 @@ if(isset($_POST['Enviar'])){
 
             
             $servername = "localhost";
-            $username ="mitiendaonline";
-            $passwd = "1234";
+            $username ="mitiendaonline3";
+            $passwd = "1234localhost";
             
             //creamos la conexion
 
