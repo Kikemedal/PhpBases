@@ -144,7 +144,6 @@ if(isset($_POST['Enviar'])){
                 <br>
                 <label>Introduce el precio en €: </label><input type="number" placeholder="precio" name="precio_producto" min="0.1" step="any" id="precio_producto">
                 <br>
-                <!--<input type="hidden" name="MAX_FILE_SIZE" value="30000" /> -->
                 <label>Introduce una imagen para el producto: </label> <input type="file" name="imagen_producto" id="imagen_producto">
                 <br>
                 <label>Selecciona la categoría del producto: </label> 
@@ -157,8 +156,8 @@ if(isset($_POST['Enviar'])){
                 <br>
                 <button type="submit" name="Enviar"> Enviar Formulario </button>
             </form>
-        </div>
-        
+            <a href="cierra_sesion.php"> Cerrar sesion</a>
+        </div>        
     </body>
 
 </html>

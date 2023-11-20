@@ -35,7 +35,8 @@ if(empty($_SESSION['correo'])){
                 <li> <a href=''> Elimina un producto </a></li>
             </ul>
         </nav>
-
+        <br>
+        <a href='cierra_sesion.php'> Cierra sesion </a>
     </body> 
 
 </html>

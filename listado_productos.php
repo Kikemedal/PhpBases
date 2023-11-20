@@ -13,6 +13,8 @@ if(empty($_SESSION['correo'])){
 
 }
 
+echo "<a href='cierra_sesion.php'> Cierra sesion </a>";
+
 if(isset($_POST['Enviar'])){
     $servername = "localhost";
     $username = "mitiendaonline3";
